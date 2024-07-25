@@ -8,7 +8,7 @@ export const Paths = () => {
             <Routes>
                 <Route path="/" element={<PageLayout />}>
                     <Route index element={<Home />} />
-                    {/* <Route path="seu-caminho" element={seu componente} /> */}
+                    {/* <Route path="seu-caminho" element={seu componente } /> */}
                 </Route>
             </Routes>
         </BrowserRouter>
