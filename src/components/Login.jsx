@@ -6,6 +6,7 @@ import Facebook from "../assets/Face.svg";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import HeaderLogin from "./HeaderLogin";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const {
@@ -41,8 +42,8 @@ const Login = () => {
                   <label className="text-sm text-black font-bold">
                     Login *
                   </label>
-                  <input
-                    className="bg-zinc-50 h-12 rounded-sm placeholder:text-gray-400 placeholder:text-sm placeholder:px-8"
+                  <input 
+                    className="bg-zinc-50 h-12 rounded-sm placeholder:text-gray-400 placeholder:text-sm placeholder:px-8 pl-3"
                     type="email"
                     placeholder="Insira seu login ou email"
                     {...register("email", { required: true })}
@@ -53,14 +54,15 @@ const Login = () => {
                     Senha *
                   </label>
                   <input
-                    className="bg-zinc-50 h-12 rounded-sm placeholder:text-gray-400 placeholder:text-sm placeholder:px-8"
+                    className="bg-zinc-50 h-12 rounded-sm placeholder:text-gray-400 placeholder:text-sm placeholder:px-8 pl-3"
                     type="password"
                     placeholder="Insira sua senha"
                     {...register("password", {required: true})}
                   />
                 </div>
                 <span className="text-sm text-zinc-800 py-6">
-                  <button className="underline">Esqueci a senha</button>
+                  <Link className="underline" to={"/recuperar"} >Esqueci minha senha</Link>
+                  
                 </span>
               </div>
               <div className="p-2">

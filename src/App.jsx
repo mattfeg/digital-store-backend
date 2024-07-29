@@ -4,16 +4,12 @@ import Login from './components/Login';
 import RecuperarSenha from './EsqueciASenha';
 import './index.css';
 import 'primeicons/primeicons.css';
+import { Paths } from './routes';
 
 const App = () => {
   return (
     <>
-      <h1 className='text-3xl'>
-        
-        <Login/>
-        {/* <RecuperarSenha/> */}
-      </h1>
-      
+      <Paths />
     </>
   );
 }
