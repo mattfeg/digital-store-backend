@@ -41,7 +41,7 @@ const Cadastro = () => {
           <header className="flex flex-col items-center lg:items-start justify-center lg:justify-start h-[84px] mb-3 lg:mb-5">
           <h3 className="text-dark-gray text-center font-bold text-xl tracking-widest leading-8 lg:text-3xl lg:tracking-wider lg:leading-9 lg:mb-3">Crie sua conta</h3>
           <p className="text-sm lg:text-base leading-6 lg:leading-7 tracking-wide text-dark-gray-2">Já possui uma conta? Entre{" "}
-            <Link to="/login" className="underline hover:text-blue-700">aqui</Link>.
+            <Link to="/login" className="underline hover:text-primary-1">aqui</Link>.
           </p>
           </header>
           <form className="flex flex-col w-full mb-2" onSubmit={handleSubmit}>
