@@ -1,14 +1,17 @@
 //import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { validateEmail } from "../utils";
 
 const Cadastro = () => {
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState('');
   const navigate = useNavigate();
 
-  
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
