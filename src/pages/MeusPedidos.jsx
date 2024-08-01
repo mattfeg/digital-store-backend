@@ -1,9 +1,10 @@
-import MinhasInformações from "../components/MinhasInformações";
+import MinhasInformacoes from "../components/MinhasInformacoes";
+
 
 const MeusPedidos = () => {
     return ( 
         <>
-            <MinhasInformações />
+            <MinhasInformacoes />
         </>
      );
 }

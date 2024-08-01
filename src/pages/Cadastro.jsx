@@ -1,4 +1,3 @@
-//import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -20,21 +19,6 @@ const Cadastro = () => {
     } else {
       navigate("/cadastro-completo");
     }
-
-  //   try {
-  //     const response = await axios.post('/check-email', { email });
-
-  //     if (response.exists) {
-  //       setEmailError('Este email já está cadastrado.');
-  //     } else {
-  //       setEmailError('');
-  //       console.log('Email: ', email);
-  //       navigate("/cadastro-completo");
-  //     }
-  //   } catch (error) {
-  //     console.error('Erro ao verificar email:', error);
-  //     setEmailError('Erro ao verificar email. Tente novamente mais tarde.');
-  //   }
   };
  
   return (
