@@ -11,6 +11,7 @@ async function executarSQL(query){
     });
 
     const [result] = await conexao.query(query);
+
     conexao.end();
 
     return result;

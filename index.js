@@ -4,6 +4,9 @@ const usuarioRoutes = require('./src/routes/usuarioRoute')
 const express =  require('express')
 const cors =  require('cors')
 const nodemailer = require('nodemailer')
+const avaliacoesRoutes = require("./src/routes/avaliacoesRoutes");
+require('dotenv').config()
+
 
 const port = 8000
 const app = express()
@@ -16,14 +19,15 @@ const transporter = nodemailer.createTransport({
 })
 
 
-app.use(cors())
-app.use(express.json())
+app.use(cors());
+app.use(express.json());
 
 app.get('/', (req, res) => {
     res.send("Documentação")
 });
 
 app.use('/usuarios', verificarToken, usuarioRoutes)
+
 app.post('/login', async(req,res)=>{
     res.send(await logar(req.body))
 })
@@ -79,6 +83,8 @@ app.post('/recuperar-senha/:token', async (req, res) => {
         res.status(400).json({ message: 'Token inválido' })
     }
 })
+
+app.use("/avaliacoes", avaliacoesRoutes);
 
 app.listen(port, () => {
     console.log(`http://localhost:${port}`)
