@@ -1,14 +1,17 @@
+require('dotenv').config()
+
 const mysql = require("mysql2/promise");
 
-async function executarSQL(sql){
+async function executarSQL(query){
     const conexao = await mysql.createConnection({
-        host: 'reforcodev.com',
-        user: 'refo9178_fs31_user',
-        password: 'FS31@123456',
-        database: 'refo9178_fs31'
+        host: process.env.HOST_NAME,
+        user: process.env.USER_NAME,
+        password: process.env.USER_PASS,
+        database: process.env.DATABASE_NAME
     });
 
-    const [result] = await conexao.query(sql);
+    const [result] = await conexao.query(query);
+
     conexao.end();
 
     return result;
