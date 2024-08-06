@@ -35,7 +35,7 @@ const RecuperarSenha = () => {
                   Digite o email para verificacao *
                 </label>
                 <input
-                  className="bg-zinc-50 h-12 rounded-sm placeholder:text-gray-400 placeholder:text-sm placeholder:px-8"
+                  className="bg-zinc-50 h-12 rounded-sm placeholder:text-gray-400 text-sm placeholder: p-3"
                   type="email"
                   placeholder="Insira seu email"
                   {...register("email", { required: true })}
@@ -55,12 +55,18 @@ const RecuperarSenha = () => {
           </div>
         </div>
         <div className="relative flex items-center justify-center w-full">
-          <div className="hidden lg:absolute lg:top-1 lg:left-1 lg:transform lg:rotate-[350deg] lg:flex lg:justify-center lg:items-center">
-            <img src={Sapato} alt="sapato" style={{ height: "400px" }} />
-          </div>
-          <div className=" hidden lg:absolute lg:top-20 lg:right-0 lg:transform lg:-rotate-12 lg:flex lg:justify-center lg:items-center">
-            <img src={Sapatoo} alt="sapato" style={{ height: "400px" }} />
-          </div>
+          <img
+            className="hidden lg:block lg:absolute lg:top-1 lg:left-14 lg:transform lg:rotate-[350deg]"
+            src={Sapato}
+            alt="sapato"
+            style={{ height: "400px" }}
+          />
+          <img
+            className="hidden lg:block lg:absolute lg:top-20 lg:right-0 lg:transform lg:-rotate-12"
+            src={Sapatoo}
+            alt="sapato"
+            style={{ height: "400px" }}
+          />
         </div>
       </div>
     </section>

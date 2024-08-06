@@ -40,7 +40,7 @@ const Login = () => {
               <div className="flex flex-col gap-2">
                 <label className="text-sm text-black font-bold">Login *</label>
                 <input
-                  className="bg-zinc-50 h-12 rounded-sm placeholder:text-gray-400 placeholder:text-sm placeholder:px-2 pl-3"
+                  className="bg-zinc-50 h-12 rounded-sm placeholder:text-gray-400 placeholder:text-sm text-sm placeholder: p-3"
                   type="email"
                   placeholder="Insira seu login ou email"
                   {...register("email", { required: true })}
@@ -49,23 +49,23 @@ const Login = () => {
               <div className="flex flex-col gap-2">
                 <label className="text-sm text-black font-bold">Senha *</label>
                 <input
-                  className="bg-zinc-50 h-12 rounded-sm placeholder:text-gray-400 placeholder:text-sm placeholder:px-2 pl-3"
+                  className="bg-zinc-50 h-12 rounded-sm placeholder:text-gray-400 placeholder:text-sm text-sm placeholder: p-3"
                   type="password"
                   placeholder="Insira sua senha"
                   {...register("password", { required: true })}
                 />
               </div>
               <span className="text-sm text-zinc-800 py-6">
-                <Link className="underline" to={"/recuperar"}>
+                <Link className="underline hover:text-pink-700" to={"/recuperar"}>
                   Esqueci minha senha
                 </Link>
               </span>
             </div>
             <div className="p-2">
-              <div className="bg-pink-600 flex justify-center h-10 rounded-lg">
+              <div className="bg-pink-600 flex justify-center h-10 rounded-lg hover:bg-tertiary">
                 <button
                   onClick={() => handleSubmit(onSubmit)()}
-                  className="w-full text-sm text-white font-bold"
+                  className="w-full text-sm text-white font-bold "
                 >
                   Acessar conta
                 </button>
