@@ -12,7 +12,6 @@ const Login = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
   } = useForm();
 
   const onSubmit = async (data) => {
@@ -41,7 +40,7 @@ const Login = () => {
               <div className="flex flex-col gap-2">
                 <label className="text-sm text-black font-bold">Login *</label>
                 <input
-                  className="bg-zinc-50 h-12 rounded-sm placeholder:text-gray-400 placeholder:text-sm placeholder:px-8 pl-3"
+                  className="bg-zinc-50 h-12 rounded-sm placeholder:text-gray-400 placeholder:text-sm placeholder:px-2 pl-3"
                   type="email"
                   placeholder="Insira seu login ou email"
                   {...register("email", { required: true })}
@@ -50,7 +49,7 @@ const Login = () => {
               <div className="flex flex-col gap-2">
                 <label className="text-sm text-black font-bold">Senha *</label>
                 <input
-                  className="bg-zinc-50 h-12 rounded-sm placeholder:text-gray-400 placeholder:text-sm placeholder:px-8 pl-3"
+                  className="bg-zinc-50 h-12 rounded-sm placeholder:text-gray-400 placeholder:text-sm placeholder:px-2 pl-3"
                   type="password"
                   placeholder="Insira sua senha"
                   {...register("password", { required: true })}
