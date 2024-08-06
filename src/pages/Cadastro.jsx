@@ -1,14 +1,16 @@
-import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { validateEmail } from "../utils";
 
 const Cadastro = () => {
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState('');
   const navigate = useNavigate();
 
-  
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -17,21 +19,6 @@ const Cadastro = () => {
     } else {
       navigate("/cadastro-completo");
     }
-
-  //   try {
-  //     const response = await axios.post('/check-email', { email });
-
-  //     if (response.exists) {
-  //       setEmailError('Este email já está cadastrado.');
-  //     } else {
-  //       setEmailError('');
-  //       console.log('Email: ', email);
-  //       navigate("/cadastro-completo");
-  //     }
-  //   } catch (error) {
-  //     console.error('Erro ao verificar email:', error);
-  //     setEmailError('Erro ao verificar email. Tente novamente mais tarde.');
-  //   }
   };
  
   return (
@@ -41,7 +28,7 @@ const Cadastro = () => {
           <header className="flex flex-col items-center lg:items-start justify-center lg:justify-start h-[84px] mb-3 lg:mb-5">
           <h3 className="text-dark-gray text-center font-bold text-xl tracking-widest leading-8 lg:text-3xl lg:tracking-wider lg:leading-9 lg:mb-3">Crie sua conta</h3>
           <p className="text-sm lg:text-base leading-6 lg:leading-7 tracking-wide text-dark-gray-2">Já possui uma conta? Entre{" "}
-            <Link to="/login" className="underline hover:text-blue-700">aqui</Link>.
+            <Link to="/login" className="underline hover:text-primary-1">aqui</Link>.
           </p>
           </header>
           <form className="flex flex-col w-full mb-2" onSubmit={handleSubmit}>
