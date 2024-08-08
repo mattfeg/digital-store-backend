@@ -1,36 +1,37 @@
+import tennis from "../assets/images/tenis-produtos.png";
 
 const pedidos = [
   {
     id: 1,
-    imagem: 'src/assets/images/tenis-produtos.png',
+    imagem: tennis,
     numero: 2234981932,
     descricao: 'Tênis Nike Revolution 6 Next Nature Masculino',
     status: 'Produto em trânsito'
   },
   {
     id: 2,
-    imagem: 'src/assets/images/tenis-produtos.png',
+    imagem: tennis,
     numero: 4495810492,
     descricao: 'Tênis Nike Revolution 6 Next Nature Masculino',
     status: 'Finalizado'
   },
   {
     id: 3,
-    imagem: 'src/assets/images/tenis-produtos.png',
+    imagem: tennis,
     numero: 4495810493,
     descricao: 'Tênis Nike Revolution 6 Next Nature Masculino',
     status: 'Cancelado'
   },
   {
     id: 4,
-    imagem: 'src/assets/images/tenis-produtos.png',
+    imagem: tennis,
     numero: 4495810494,
     descricao: 'Tênis Nike Revolution 6 Next Nature Masculino',
     status: 'Finalizado'
   },
   {
     id: 5,
-    imagem: 'src/assets/images/tenis-produtos.png',
+    imagem: tennis,
     numero: 4495810495,
     descricao: 'Tênis Nike Revolution 6 Next Nature Masculino',
     status: 'Finalizado'
@@ -52,8 +53,8 @@ const statusCor = (status) => {
 
 const MeusPedidos = () => {
   return (
-    <div className="flex min-h-screen items-center justify-center lg:justify-end bg-light-gray-3">
-        <div className="font-sans min-w-[315px] lg:w-[890px] lg:h-[572px] rounded bg-white mx-5 my-10 lg:mr-[101px] px-5 py-5 lg:py-6">
+    <div>
+        <div className="font-sans min-w-[315px] lg:w-[890px] lg:h-[572px] rounded bg-white mx-5 lg:mr-[101px] px-5 py-5 lg:py-6">
           <div className="flex md:justify-between lg:items-center mb-3 lg:mb-4">
             <h2 className="text-sm leading-[22px] tracking-[0.75px] font-bold text-dark-gray-2">Meus Pedidos</h2>
             <span className="hidden md:flex text-sm leading-[22px] tracking-[0.25px] font-medium text-dark-gray-2">STATUS</span>
