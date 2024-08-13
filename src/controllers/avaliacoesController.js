@@ -18,7 +18,8 @@ async function listarUmaAvaliacao(id){
         return await prisma.avaliacoes.findFirst({
             where: {
                 avaliacao_id: parseInt(id)
-            }
+            },
+
         })
     } catch (error) {
         return {
@@ -79,11 +80,11 @@ async function editarAvaliacao(dados){
             }
         }
     } catch (error) {
-        // return {
-        //     status: 422,
-        //     detail: error.message,
-        //     severity: "danger"
-        // }
+        return {
+            status: 422,
+            detail: error.message,
+            severity: "danger"
+        }
     }
 }
 
