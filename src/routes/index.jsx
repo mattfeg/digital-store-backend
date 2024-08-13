@@ -25,6 +25,7 @@ export const Paths = () => {
                 </Route>
                 
                 <Route path="/login" element={<Login/>} />
+                <Route path="/cadastro-completo" element={<CadastroCompleto/>} />
                 <Route path="/recuperar" element={<RecuperarSenha/>}/>
             </Routes>
         </BrowserRouter>
