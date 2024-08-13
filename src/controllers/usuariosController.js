@@ -111,10 +111,6 @@ async function editarUsuario(data){
 
 async function logar(data){
     try {
-        if(data.usuario_email == "" || !data.usuario_email){
-            throw new Error("Campo email é obrigatório!")
-        }
-
         if(data.usuario_senha == "" || !data.usuario_senha){
             throw new Error("Campo senha é obrigatório!")
         }

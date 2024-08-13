@@ -9,23 +9,26 @@ datasource db {
 }
 
 model avaliacoes {
-  avaliacao_id      Int        @id @default(autoincrement())
-  avaliacao_opiniao String     @db.VarChar(255)
-  avaliacao_nota    Int        @default(5)
-  avaliacao_data    DateTime   @default(now()) @db.DateTime(0)
+  avaliacao_id      Int      @id @default(autoincrement())
+  avaliacao_opiniao String   @db.VarChar(255)
+  avaliacao_nota    Int      @default(5)
+  avaliacao_data    DateTime @default(now()) @db.DateTime(0)
   usuario_id        Int
+  usuarios          usuarios @relation(fields: [usuario_id], references: [usuario_id])
 }
 
 model enderecos {
-  endereco_estado      String  @db.VarChar(25)
-  endereco_cidade      String  @db.VarChar(50)
-  endereco_bairro      String  @db.VarChar(25)
-  endereco_rua         String  @db.VarChar(50)
-  endereco_numero      String  @db.VarChar(5)
-  endereco_complemento String? @db.VarChar(100)
-  endereco_referencia  String? @db.VarChar(100)
-  endereco_cep         String  @db.VarChar(10)
-  endereco_id          Int     @id @default(autoincrement())
+  endereco_estado      String   @db.VarChar(25)
+  endereco_cidade      String   @db.VarChar(50)
+  endereco_bairro      String   @db.VarChar(25)
+  endereco_rua         String   @db.VarChar(50)
+  endereco_numero      String   @db.VarChar(5)
+  endereco_complemento String?  @db.VarChar(100)
+  endereco_referencia  String?  @db.VarChar(100)
+  endereco_cep         String   @db.VarChar(10)
+  endereco_id          Int      @id @default(autoincrement())
+  usuario_id           Int      @unique
+  usuario              usuarios @relation(fields: [usuario_id], references: [usuario_id])
 }
 
 model produtos {
@@ -57,14 +60,14 @@ model tarefas {
 }
 
 model usuarios {
-  usuario_id             Int         @id @default(autoincrement())
-  usuario_email          String      @unique(map: "usuario_email") @db.VarChar(200)
-  usuario_senha          String?     @db.VarChar(255)
-  usuario_nome           String      @db.VarChar(100)
-  usuario_cpf            String      @db.VarChar(20)
-  usuario_celular        String?     @db.VarChar(20)
-  usuario_newsletter     Boolean?    @default(false)
-  created_at             DateTime    @default(now()) @db.DateTime(0)
-  avaliacoes             avaliacoes? @relation(fields: [avaliacoesAvaliacao_id], references: [avaliacao_id])
-  avaliacoesAvaliacao_id Int?
+  usuario_id         Int          @id @default(autoincrement())
+  usuario_email      String       @unique(map: "usuario_email") @db.VarChar(200)
+  usuario_senha      String?      @db.VarChar(255)
+  usuario_nome       String       @db.VarChar(100)
+  usuario_cpf        String       @db.VarChar(20)
+  usuario_celular    String?      @db.VarChar(20)
+  usuario_newsletter Boolean?     @default(false)
+  created_at         DateTime     @default(now()) @db.DateTime(0)
+  usuario_avaliacoes avaliacoes[]
+  endereco_id        enderecos?
 }
