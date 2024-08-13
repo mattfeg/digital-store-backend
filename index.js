@@ -26,11 +26,9 @@ app.get('/', (req, res) => {
     res.send("Documentação")
 });
 
-app.use('/usuarios', verificarToken, usuarioRoutes)
-
 app.post('/login', async(req,res)=>{
     res.send(await logar(req.body))
-})
+});
 
 app.post('/req-recuperar-senha', async (req, res) => {
     const usuarioEmail = req.body.usuario_email
@@ -84,7 +82,9 @@ app.post('/recuperar-senha/:token', async (req, res) => {
     }
 })
 
-app.use("/avaliacoes", avaliacoesRoutes);
+app.use('/usuarios', verificarToken, usuarioRoutes)
+
+app.use("/avaliacoes", verificarToken, avaliacoesRoutes);
 
 app.listen(port, () => {
     console.log(`http://localhost:${port}`)

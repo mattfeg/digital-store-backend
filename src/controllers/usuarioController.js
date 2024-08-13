@@ -58,7 +58,7 @@ async function cadastrarUsuario(data){
         }else{
             return {
                 status: 422,
-                detail: "Usuario ja existe",
+                detail: "Usuario já existe",
                 severity: "warn"
             }
         }
@@ -75,7 +75,7 @@ async function cadastrarUsuario(data){
 async function apagarUsuario(id){
     
     try {
-        const response = await executarSQL(`DELETE FROM usuarios WHERE usuario_id = ${id}`)
+        const response = await executarSQL(`DELETE FROM usuarios WHERE usuario_id = ${id}`);
         if(0 < response.affectedRows){
             return {
                 status: 200,
