@@ -1,12 +1,12 @@
-const { logar } = require('./src/controllers/usuarioController')
+const { logar } = require('./src/controllers/usuariosController')
 const { verificarToken } = require('./src/utils')
-const usuarioRoutes = require('./src/routes/usuarioRoute')
+const usuarioRoutes = require('./src/routes/usuariosRoute')
+const avaliacoesRoutes = require("./src/routes/avaliacoesRoutes");
+const produtosRoutes = require("./src/routes/produtosRoutes")
 const express =  require('express')
 const cors =  require('cors')
 const nodemailer = require('nodemailer')
-const avaliacoesRoutes = require("./src/routes/avaliacoesRoutes");
 require('dotenv').config()
-
 
 const port = 8000
 const app = express()
@@ -84,7 +84,7 @@ app.post('/recuperar-senha/:token', async (req, res) => {
 
 app.use('/usuarios', verificarToken, usuarioRoutes)
 
-app.use("/avaliacoes", verificarToken, avaliacoesRoutes);
+app.use('/avaliacoes', verificarToken, avaliacoesRoutes)
 
 app.listen(port, () => {
     console.log(`http://localhost:${port}`)
