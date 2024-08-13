@@ -15,8 +15,8 @@ const MinhasInformacoes = () => {
   const [cep, setCep] = useState("433-8800");
 
   return (
-    <main className="flex min-h-screen items-center justify-center lg:justify-end bg-light-gray-3">
-      <section className="bg-white min-w-[315px] h-[466px] lg:w-[890px] lg:h-[466px] lg:mr-[101px] flex flex-col items-start justify-start p-5 font-sans rounded">
+    <div>
+      <section className="bg-white min-w-[315px] h-[466px] lg:w-[890px] lg:h-[466px] mx-5 lg:mr-[101px] flex flex-col items-start justify-start p-5 font-sans rounded">
         <div className="w-full flex justify-between mt-1">
           <h4 className="font-bold text-sm tracking-[0.75px] leading-[22px] text-dark-gray-2">
             Minhas Informações
@@ -233,7 +233,7 @@ const MinhasInformacoes = () => {
           )}
         ></Dialog>
       </div>
-    </main>
+    </div>
   );
 };
 export default MinhasInformacoes;
