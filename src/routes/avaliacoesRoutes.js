@@ -1,21 +1,21 @@
-const { listarTodos, deletar, listarUm, criar } = require("../controllers/avaliacoesController");
+const { listarAvaliacoes,listarUmaAvaliacao,cadastrarAvaliacao,apagarAvaliacao, editarAvaliacao} = require("../controllers/avaliacoesController");
 
 const router = require("express").Router();
 
 router.get("/", async (req, res) => {
-    res.send(await listarTodos());
+    res.send(await listarAvaliacoes());
 });
 router.get("/:id", async (req, res) => {
-    res.send(await listarUm(req.params.id));
+    res.send(await listarUmaAvaliacao(req.params.id));
 });
 router.post("/", async (req, res) => {
-    res.send(await criar(req.body));
+    res.send(await cadastrarAvaliacao(req.body));
 });
-router.post("/:id", async (req, res) => {
-    res.send();
+router.put("/", async (req, res) => {
+    res.send(await editarAvaliacao(req.body));
 });
 router.delete("/:id", async (req, res) => {
-    res.send(await deletar(req.params.id));
+    res.send(await apagarAvaliacao(req.params.id));
 });
 
 module.exports = router;

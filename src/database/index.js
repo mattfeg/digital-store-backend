@@ -1,6 +1,9 @@
 require('dotenv').config()
 
 const mysql = require("mysql2/promise");
+const { PrismaClient } = require('@prisma/client');
+
+const prisma = new PrismaClient();
 
 async function executarSQL(query){
     const conexao = await mysql.createConnection({
@@ -12,11 +15,12 @@ async function executarSQL(query){
 
     const [result] = await conexao.query(query);
 
-    conexao.end();
+    await conexao.end();
 
     return result;
 }
 
 module.exports = {
-    executarSQL
+    executarSQL,
+    prisma
 }
