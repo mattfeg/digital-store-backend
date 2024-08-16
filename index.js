@@ -1,12 +1,18 @@
 const { logar } = require('./src/controllers/usuariosController')
 const { verificarToken } = require('./src/utils')
-const usuarioRoutes = require('./src/routes/usuariosRoute')
-const avaliacoesRoutes = require("./src/routes/avaliacoesRoutes");
-const produtosRoutes = require("./src/routes/produtosRoutes")
+const { prisma } = require('./src/database/index')
+const { jwt } = require('jsonwebtoken')
 const express =  require('express')
 const cors =  require('cors')
 const nodemailer = require('nodemailer')
+const bcrypt = require("bcrypt");
 require('dotenv').config()
+
+const usuarioRoutes = require('./src/routes/usuariosRoutes')
+const avaliacoesRoutes = require("./src/routes/avaliacoesRoutes");
+const imagensRoutes = require('./src/routes/imagensRoutes')
+const produtosRoutes = require("./src/routes/produtosRoutes")
+const marcasRoutes = require("./src/routes/marcasRoutes")
 
 const port = 8000
 const app = express()
@@ -85,6 +91,12 @@ app.post('/recuperar-senha/:token', async (req, res) => {
 app.use('/usuarios', verificarToken, usuarioRoutes)
 
 app.use('/avaliacoes', verificarToken, avaliacoesRoutes)
+
+app.use('/imagens', verificarToken, imagensRoutes)
+
+app.use('/produtos', verificarToken, produtosRoutes)
+
+app.use('/marcas', verificarToken, marcasRoutes)
 
 app.listen(port, () => {
     console.log(`http://localhost:${port}`)
