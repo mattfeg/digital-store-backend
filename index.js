@@ -6,8 +6,6 @@ const express =  require('express')
 const cors =  require('cors')
 const nodemailer = require('nodemailer')
 const bcrypt = require("bcrypt");
-const { prisma } = require('./src/database/index')
-const { jwt } = require('jsonwebtoken')
 require('dotenv').config()
 
 const usuarioRoutes = require('./src/routes/usuariosRoutes')

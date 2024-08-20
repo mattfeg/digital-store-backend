@@ -6,9 +6,9 @@ async function listarMarcas(){
 }
 
 async function listarUmaMarca(id){
-    return prisma.marcas.findFirst({
+    return prisma.marcas.findUnique({
         where: {
-            usuario_id: parseInt(id)
+            marca_id: parseInt(id)
         }
     })
 }
@@ -41,7 +41,6 @@ async function cadastrarMarca(data){
         const marcaCriada = await prisma.marcas.create({
             data: {
                 marca_nome: data.marca_nome,
-                produtos: data.produtos
             }
         })
         if(marcaCriada){
@@ -65,10 +64,7 @@ async function editarMarca(data){
             where: {
                 marca_id: data.marca_id
             },
-            data: {
-                marca_nome: data.marca_nome,
-                produtos: data.produtos
-            }
+            data: data
         })
         if(marcaAtualizada){
             return {
