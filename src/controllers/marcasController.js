@@ -1,0 +1,95 @@
+const { prisma } = require('../database/index')
+
+
+async function listarMarcas(){
+    return prisma.marcas.findMany()
+}
+
+async function listarUmaMarca(id){
+    return prisma.marcas.findFirst({
+        where: {
+            usuario_id: parseInt(id)
+        }
+    })
+}
+
+async function apagarMarca(id){
+    try {
+        const marcaApagada = await prisma.marcas.delete({
+            where: {
+                marca_id: parseInt(id)
+            }
+        })
+        if(marcaApagada){
+            return {
+                status: 200,
+                detail: "Marca apagada.",
+                severity: "success"
+            }
+        }
+    } catch (error) {
+        return {
+            status: 422,
+            detail: error.message,
+            severity: "danger"
+        }
+    }
+}
+
+async function cadastrarMarca(data){
+    try {
+        const marcaCriada = await prisma.marcas.create({
+            data: {
+                marca_nome: data.marca_nome,
+                produtos: data.produtos
+            }
+        })
+        if(marcaCriada){
+            return {
+                status: 200,
+                detail: "Marca criada.",
+                severity: "success"
+            }
+        }
+    } catch (error) {
+        return {
+            status: 422,
+            detail: error.message,
+            severity: "danger"
+        }
+    }
+}
+async function editarMarca(data){
+    try {
+        const marcaAtualizada = await prisma.marcas.update({
+            where: {
+                marca_id: data.marca_id
+            },
+            data: {
+                marca_nome: data.marca_nome,
+                produtos: data.produtos
+            }
+        })
+        if(marcaAtualizada){
+            return {
+                status: 200,
+                detail: "Marca atualizada.",
+                severity: "success"
+            }
+        }
+    } catch (error) {
+        return {
+            status: 422,
+            detail: error.message,
+            severity: "danger"
+        }
+    }
+}
+
+module.exports = {
+    listarMarcas,
+    listarUmaMarca,
+    cadastrarMarca,
+    apagarMarca,
+    editarMarca
+}
