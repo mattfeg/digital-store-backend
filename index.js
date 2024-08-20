@@ -83,7 +83,6 @@ app.post('/recuperar-senha/:token', async (req, res) => {
 })
 
 app.use('/usuarios', verificarToken, usuarioRoutes)
-
 app.use("/avaliacoes", verificarToken, avaliacoesRoutes);
 
 app.listen(port, () => {
