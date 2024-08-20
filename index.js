@@ -6,6 +6,8 @@ const express =  require('express')
 const cors =  require('cors')
 const nodemailer = require('nodemailer')
 const bcrypt = require("bcrypt");
+const { prisma } = require('./src/database/index')
+const { jwt } = require('jsonwebtoken')
 require('dotenv').config()
 
 const usuarioRoutes = require('./src/routes/usuariosRoutes')
@@ -38,9 +40,13 @@ app.post('/login', async(req,res)=>{
 
 app.post('/req-recuperar-senha', async (req, res) => {
     const usuarioEmail = req.body.usuario_email
-    const response = await executarSQL(`SELECT * FROM usuarios WHERE usuario_email = '${usuarioEmail}';`)[0]
+    const resposta = await prisma.usuarios.findUnique({
+        where: {
+            usuario_email: usuarioEmail
+        }
+    })
 
-    if (!0<response.length) {
+    if (!resposta) {
         return res.status(400).json({ message: 'Email não encontrado' })
     }
 
@@ -48,7 +54,7 @@ app.post('/req-recuperar-senha', async (req, res) => {
 
     const mailOptions = {
         from: process.env.EMAIL_USER,
-        to: usuario_email,
+        to: usuarioEmail,
         subject: 'Redefinição de Senha',
         html: `<p>Para redefinir sua senha, clique no link abaixo:</p>
                <a href="http://localhost:3000/recuperar-senha/${token}">Redefinir Senha</a>`
@@ -64,8 +70,9 @@ app.post('/req-recuperar-senha', async (req, res) => {
 
 app.post('/recuperar-senha/:token', async (req, res) => {
     const { token } = req.params
-    const { senha } = req.body
+    const { senha } = req.body.usuario_senha
 
+    // TODO: Atribuir corretamente o Email do Usuario
     try {
         const decoded = jwt.decode(token, process.env.SECRET)
 
@@ -73,14 +80,24 @@ app.post('/recuperar-senha/:token', async (req, res) => {
             return res.status(400).json({ message: 'Token expirado' })
         }
 
-        const response = await executarSQL(`SELECT * FROM usuarios WHERE usuario_email = '${usuarioEmail}';`)[0]
+        const resposta = await prisma.usuarios.findUnique({
+            where: {
+                usuario_email: usuarioEmail
+            }
+        })
 
-        if (!0<response.length) {
+        if (!resposta) {
             return res.status(400).json({ message: 'Usuário não encontrado' })
         }
 
         const senhaEncriptada = await bcrypt.hash(senha, 10)
-        await executarSQL(`UPDATE usuarios SET usuario_senha = '${senhaEncriptada}' WHERE usuario_email = '${usuarioEmail}';`)
+        await prisma.usuarios.update({
+            where: {
+                usuario_email: usuarioEmail
+            }, data: {
+                usuario_senha: senhaEncriptada
+            }
+        })
 
         return res.status(200).json({ message: 'Senha redefinida com sucesso' })
     } catch (error) {
