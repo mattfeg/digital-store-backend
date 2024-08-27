@@ -1,0 +1,8 @@
+/node_modules
+.env
+.idea/
+../../.turbo/
+../../node_modules/
+../../package-lock.json
+../../package.json
+../../turbo.json

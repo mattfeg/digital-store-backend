@@ -1,4 +1,4 @@
-const { prisma } = require('../database/index')
+const { prisma } = require('../database')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 require('dotenv').config()

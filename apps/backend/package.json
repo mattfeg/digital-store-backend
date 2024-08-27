@@ -4,7 +4,7 @@
   "description": "Uma API para o ecommerce da digital store...",
   "main": "index.js",
   "scripts": {
-    "dev": "npx nodemon index.js"
+    "dev": "nodemon index.js"
   },
   "keywords": [],
   "author": "",

@@ -1,6 +1,6 @@
 const { logar } = require('./src/controllers/usuariosController')
 const { verificarToken } = require('./src/utils')
-const { prisma } = require('./src/database/index')
+const { prisma } = require('./src/database')
 const { jwt } = require('jsonwebtoken')
 const express =  require('express')
 const cors =  require('cors')
@@ -13,6 +13,7 @@ const avaliacoesRoutes = require("./src/routes/avaliacoesRoutes");
 const imagensRoutes = require('./src/routes/imagensRoutes')
 const produtosRoutes = require("./src/routes/produtosRoutes")
 const marcasRoutes = require("./src/routes/marcasRoutes")
+const pedidosRoutes = require('./src/routes/pedidosRoutes')
 
 const port = 8000
 const app = express()
@@ -112,6 +113,8 @@ app.use('/imagens', verificarToken, imagensRoutes)
 app.use('/produtos', verificarToken, produtosRoutes)
 
 app.use('/marcas', verificarToken, marcasRoutes)
+
+app.use('/pedidos', verificarToken, pedidosRoutes)
 
 app.listen(port, () => {
     console.log(`http://localhost:${port}`)

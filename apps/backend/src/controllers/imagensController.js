@@ -1,4 +1,4 @@
-const { prisma } = require('../database/index')
+const { prisma } = require('../database')
 
 async function listarImagens(){
     try{
