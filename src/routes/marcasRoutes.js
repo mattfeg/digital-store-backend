@@ -57,7 +57,7 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
 	// #swagger.tags = ['Marcas']
 	// #swagger.description = 'Cria uma marca'
-	/*  #swagger.parameters['obj'] = {
+	/* #swagger.parameters['obj'] = {
                 in: 'body',
                 schema: {
                     $marca_nome: 'Puma'
@@ -85,7 +85,7 @@ router.post('/', async (req, res) => {
 router.put('/', async (req, res) => {
 	// #swagger.tags = ['Marcas']
 	// #swagger.description = 'Edita uma marca'
-	/*  #swagger.parameters['obj'] = {
+	/* #swagger.parameters['obj'] = {
                 in: 'body',
                 schema: {
                     $marca_id: 1,

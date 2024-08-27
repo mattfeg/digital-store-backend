@@ -31,7 +31,7 @@ app.use(express.json());
 app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerFile));
 
 app.get('/', (req, res) => {
-	res.send('Documentação');
+	res.redirect('/docs');
 });
 
 app.use('/usuarios', usuarioRoutes);
