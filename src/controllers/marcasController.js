@@ -2,15 +2,31 @@ const { prisma } = require('../database/index')
 
 
 async function listarMarcas(){
-    return prisma.marcas.findMany()
+    try {
+        return prisma.marcas.findMany()
+    } catch (error) {
+        return {
+            status: 422,
+            detail: error.message,
+            severity: "danger"
+        }
+    }
 }
 
 async function listarUmaMarca(id){
-    return prisma.marcas.findUnique({
-        where: {
-            marca_id: parseInt(id)
+    try {
+        return prisma.marcas.findUnique({
+            where: {
+                marca_id: parseInt(id)
+            }
+        })
+    } catch (error) {
+        return {
+            status: 422,
+            detail: error.message,
+            severity: "danger"
         }
-    })
+    }
 }
 
 async function apagarMarca(id){
