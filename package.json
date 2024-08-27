@@ -4,6 +4,7 @@
   "description": "Uma API para o ecommerce da digital store...",
   "main": "index.js",
   "scripts": {
+    "postinstall": "prisma generate",
     "dev": "npx nodemon index.js",
     "doc": "node src/swagger.js"
   },
