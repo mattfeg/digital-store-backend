@@ -2,15 +2,31 @@ const { prisma } = require('../database/index')
 
 
 async function listarMarcas(){
-    return prisma.marcas.findMany()
+    try {
+        return prisma.marcas.findMany()
+    } catch (error) {
+        return {
+            status: 422,
+            detail: error.message,
+            severity: "danger"
+        }
+    }
 }
 
 async function listarUmaMarca(id){
-    return prisma.marcas.findFirst({
-        where: {
-            usuario_id: parseInt(id)
+    try {
+        return prisma.marcas.findUnique({
+            where: {
+                marca_id: parseInt(id)
+            }
+        })
+    } catch (error) {
+        return {
+            status: 422,
+            detail: error.message,
+            severity: "danger"
         }
-    })
+    }
 }
 
 async function apagarMarca(id){
@@ -41,7 +57,6 @@ async function cadastrarMarca(data){
         const marcaCriada = await prisma.marcas.create({
             data: {
                 marca_nome: data.marca_nome,
-                produtos: data.produtos
             }
         })
         if(marcaCriada){
@@ -65,10 +80,7 @@ async function editarMarca(data){
             where: {
                 marca_id: data.marca_id
             },
-            data: {
-                marca_nome: data.marca_nome,
-                produtos: data.produtos
-            }
+            data: data
         })
         if(marcaAtualizada){
             return {

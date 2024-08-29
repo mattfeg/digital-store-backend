@@ -4,7 +4,9 @@
   "description": "Uma API para o ecommerce da digital store...",
   "main": "index.js",
   "scripts": {
-    "dev": "npx nodemon index.js"
+    "postinstall": "prisma generate",
+    "dev": "npx nodemon index.js",
+    "doc": "node src/swagger.js"
   },
   "keywords": [],
   "author": "",
@@ -17,7 +19,9 @@
     "jsonwebtoken": "^9.0.2",
     "mysql2": "^3.10.3",
     "nodemailer": "^6.9.14",
-    "nodemon": "^3.1.4"
+    "nodemon": "^3.1.4",
+    "swagger-autogen": "^2.23.7",
+    "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
     "@prisma/client": "^5.18.0",
