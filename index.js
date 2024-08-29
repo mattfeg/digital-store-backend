@@ -15,6 +15,7 @@ const avaliacoesRoutes = require('./src/routes/avaliacoesRoutes');
 const imagensRoutes = require('./src/routes/imagensRoutes');
 const produtosRoutes = require('./src/routes/produtosRoutes');
 const marcasRoutes = require('./src/routes/marcasRoutes');
+const pedidosRoutes = require('./src/routes/pedidosRoutes')
 
 const port = 8000;
 const app = express();
@@ -41,6 +42,8 @@ app.use('/avaliacoes', verificarToken, avaliacoesRoutes);
 app.use('/imagens', verificarToken, imagensRoutes);
 
 app.use('/produtos', verificarToken, produtosRoutes);
+
+app.use('/pedidos', pedidosRoutes)
 
 app.use(
 	'/marcas',

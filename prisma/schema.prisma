@@ -47,8 +47,8 @@ model produtos {
   produto_em_promocao Boolean       @default(false)
   produto_destaque    Boolean       @default(false)
   produto_tags        Int?
-  marca_id            Int?           @unique
-  categoria_id        Int?           @unique
+  marca_id            Int?          @unique
+  categoria_id        Int?          @unique
   produto_imagems     imagens[]
   produto_tamanho     tamanhos?
   genero_id           Int?
@@ -111,11 +111,15 @@ model carrinhoItens {
   @@unique([carrinho_id, produto_id])
 }
 
+// TODO: Relacionar o campo de pedido_imagem com a model imagens
 model pedidos {
-  pedido_id     Int           @id @default(autoincrement())
-  pedido_data   DateTime      @default(now()) @db.DateTime(0)
-  pedido_status String
-  itens         pedidoItens[]
+  pedido_id        Int      @id @default(autoincrement())
+  pedido_data      DateTime @default(now()) @db.DateTime(0)
+  pedido_status    String   @default("Em Andamento")
+  pedido_descricao String?
+  pedido_imagem    String?
+
+  itens pedidoItens[]
 
   criado_em     DateTime  @default(now()) @db.DateTime(0)
   atualizado_em DateTime? @default(now()) @db.DateTime(0)
@@ -211,9 +215,9 @@ model usuarios {
   usuario_newsletter Boolean?     @default(false)
   usuario_avaliacoes avaliacoes[]
   usuario_endereco   enderecos?
-  carrinhos     carrinhos?
-  desejos       desejos?
+  carrinhos          carrinhos?
+  desejos            desejos?
 
-  criado_em    DateTime   @default(now()) @db.DateTime(0)
-  atualizado_em DateTime?  @default(now()) @db.DateTime(0)
+  criado_em     DateTime  @default(now()) @db.DateTime(0)
+  atualizado_em DateTime? @default(now()) @db.DateTime(0)
 }
