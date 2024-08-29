@@ -8,6 +8,9 @@ async function listarUmPedido(id){
     const pedido = await prisma.pedidos.findUnique({
         where: {
             pedido_id: parseInt(id)
+        },
+        include: {
+            itens: true
         }
     })
     if(pedido){
@@ -22,7 +25,17 @@ async function listarUmPedido(id){
 
 async function cadastrarPedido(data){
     try{
-        const pedidoCriado = await prisma.pedidos.create({data: data})
+        let itens = JSON.parse(data.itens);
+        delete data.itens;
+        const pedidoCriado = await prisma.pedidos.create({data: data}).then(async (data) => {
+            let assis = itens.map(i => {
+                let item =  { ...i, pedido_id: data.pedido_id }
+                return item;
+            });
+            await prisma.pedidoItens.createMany({
+                data: assis
+            })
+        })
 
         if(pedidoCriado){
             return {
