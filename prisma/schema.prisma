@@ -47,8 +47,8 @@ model produtos {
   produto_em_promocao Boolean       @default(false)
   produto_destaque    Boolean       @default(false)
   produto_tags        Int?
-  marca_id            Int?          @unique
-  categoria_id        Int?          @unique
+  marca_id            Int?
+  categoria_id        Int?
   produto_imagems     imagens[]
   produto_tamanho     tamanhos?
   genero_id           Int?
@@ -164,7 +164,7 @@ model generos {
 model categorias {
   categoria_id        Int        @id @default(autoincrement())
   categoria_nome      String     @db.VarChar(30)
-  categoria_descricao String     @db.VarChar(255)
+  categoria_descricao String?     @db.VarChar(255)
   produtos            produtos[]
 
   criado_em     DateTime  @default(now()) @db.DateTime(0)
