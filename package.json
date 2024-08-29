@@ -1,7 +1,7 @@
 {
   "name": "digital-store-backend",
   "version": "1.0.0",
-  "description": "Uma API para o ecommerce da digital store...",
+  "description": "Uma API para o ecommerce da digital store....",
   "main": "index.js",
   "scripts": {
     "postinstall": "prisma generate",
