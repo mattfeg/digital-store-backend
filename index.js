@@ -32,36 +32,32 @@ app.use(express.json());
 app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerFile));
 
 app.get('/', (req, res) => {
-	res.send('oi');
+	res.redirect('/docs');
 });
 
-// app.get('/', (req, res) => {
-// 	res.redirect('/docs');
-// });
+app.use('/usuarios', usuarioRoutes);
 
-// app.use('/usuarios', usuarioRoutes);
+app.use('/avaliacoes', verificarToken, avaliacoesRoutes);
 
-// app.use('/avaliacoes', verificarToken, avaliacoesRoutes);
+app.use('/imagens', verificarToken, imagensRoutes);
 
-// app.use('/imagens', verificarToken, imagensRoutes);
+app.use('/produtos', verificarToken, produtosRoutes);
 
-// app.use('/produtos', verificarToken, produtosRoutes);
+app.use('/pedidos', pedidosRoutes)
 
-// app.use('/pedidos', pedidosRoutes)
-
-// app.use(
-// 	'/marcas',
-// 	/* #swagger.responses[401] = {
-//             description: 'Não autorizado',
-//             schema: {
-//                 status: 401,
-//                 detail: 'Usuário não encontrado.',
-//                 severity: 'warm'
-//             }
-//     } */
-// 	verificarToken,
-// 	marcasRoutes
-// );
+app.use(
+	'/marcas',
+	/* #swagger.responses[401] = {
+            description: 'Não autorizado',
+            schema: {
+                status: 401,
+                detail: 'Usuário não encontrado.',
+                severity: 'warm'
+            }
+    } */
+	verificarToken,
+	marcasRoutes
+);
 
 app.listen(port, () => {
 	console.log(`http://localhost:${port}`);
