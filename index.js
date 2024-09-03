@@ -36,13 +36,52 @@ app.get('/', (req, res) => {
 	res.redirect('/docs');
 });
 
-app.use('/usuarios', usuarioRoutes);
+app.use('/usuarios',
+	/* #swagger.responses[401] = {
+            description: 'Não autorizado',
+            schema: {
+                status: 401,
+                detail: 'Usuário não encontrado.',
+                severity: 'warm'
+            }
+    } */
+	usuarioRoutes);
 
-app.use('/avaliacoes', verificarToken, avaliacoesRoutes);
+app.use('/avaliacoes',
+	/* #swagger.responses[401] = {
+            description: 'Não autorizado',
+            schema: {
+                status: 401,
+                detail: 'Usuário não encontrado.',
+                severity: 'warm'
+            }
+    } */
+	verificarToken,
+	avaliacoesRoutes);
 
-app.use('/imagens', verificarToken, imagensRoutes);
+app.use('/imagens',
+	/* #swagger.responses[401] = {
+            description: 'Não autorizado',
+            schema: {
+                status: 401,
+                detail: 'Usuário não encontrado.',
+                severity: 'warm'
+            }
+    } */
+	verificarToken,
+	imagensRoutes);
 
-app.use('/produtos', verificarToken, produtosRoutes);
+app.use('/produtos',
+	/* #swagger.responses[401] = {
+            description: 'Não autorizado',
+            schema: {
+                status: 401,
+                detail: 'Usuário não encontrado.',
+                severity: 'warm'
+            }
+    } */
+	verificarToken,
+	produtosRoutes);
 
 app.use('/pedidos', verificarToken, pedidosRoutes)
 
