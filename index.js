@@ -16,6 +16,7 @@ const imagensRoutes = require('./src/routes/imagensRoutes');
 const produtosRoutes = require('./src/routes/produtosRoutes');
 const marcasRoutes = require('./src/routes/marcasRoutes');
 const pedidosRoutes = require('./src/routes/pedidosRoutes')
+const categoriasRoutes = require('./src/routes/categoriasRoutes')
 
 const port = 8000;
 const app = express();
@@ -82,7 +83,9 @@ app.use('/produtos',
 	verificarToken,
 	produtosRoutes);
 
-app.use('/pedidos',
+app.use('/pedidos', verificarToken, pedidosRoutes)
+
+app.use('/categorias',
 	/* #swagger.responses[401] = {
             description: 'Não autorizado',
             schema: {
@@ -92,7 +95,7 @@ app.use('/pedidos',
             }
     } */
 	verificarToken,
-	pedidosRoutes)
+	categoriasRoutes)
 
 app.use(
 	'/marcas',
