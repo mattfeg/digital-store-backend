@@ -5,22 +5,159 @@ const { verificarToken } = require('../utils')
 const { prisma } = require('../database')
 
 router.get('/', verificarToken, async (req,res)=>{
+	// #swagger.tags = ['Usuarios']
+	// #swagger.description = 'Retorna lista de usuarios'
+	/* #swagger.responses[200] = {
+            description: 'Retorna lista de usuarios',
+            schema: [{
+                usuario_id: 1,
+				usuario_email: "email@email.com",
+				usuario_senha: "senha-encriptada",
+				usuario_nome: "Nome do Usuario",
+				usuario_cpf: "123.123.123-12",
+				usuario_celular: "8599999-9999",
+				usuario_newsletter: 1,
+				usuario_avaliacoes: [],
+				usuario_endereco: 1,
+				carrinhos: 1,
+				desejos: 1
+            }]
+    } */
+	/* #swagger.responses[422] = {
+            description: 'Erro interno',
+            schema: {
+                status: 422,
+                detail: 'mensagem do sistema',
+                severity: 'danger'
+            }
+    } */
     res.send(await listarUsuarios())
 })
 
 router.get('/:id', verificarToken, async (req,res)=>{
+	// #swagger.tags = ['Usuarios']
+	// #swagger.description = 'Retorna um usuario'
+	/* #swagger.responses[200] = {
+            description: 'Retorna um usuario',
+            schema: {
+                usuario_id: 1,
+				usuario_email: "email@email.com",
+				usuario_senha: "senha-encriptada",
+				usuario_nome: "Nome do Usuario",
+				usuario_cpf: "123.123.123-12",
+				usuario_celular: "8599999-9999",
+				usuario_newsletter: 1,
+				usuario_avaliacoes: [],
+				usuario_endereco: 1,
+				carrinhos: 1,
+				desejos: 1
+            }
+    } */
+	/* #swagger.responses[422] = {
+            description: 'Erro interno',
+            schema: {
+                status: 422,
+                detail: 'mensagem do sistema',
+                severity: 'danger'
+            }
+    } */
     res.send(await listarUmUsuario(req.params.id))
 })
 
 router.post('/', async (req,res)=>{
+	// #swagger.tags = ['Usuarios']
+	// #swagger.description = 'Cria um usuario'
+	/* #swagger.parameters['obj'] = {
+                in: 'body',
+                schema: {
+					$usuario_email: "email@email.com",
+					$usuario_senha: "senha-usuario",
+					$usuario_nome: "Nome do Usuario",
+					$usuario_cpf: "123.123.123-12",
+					$usuario_celular: "8599999-9999",
+					$usuario_newsletter: 1,
+					$usuario_avaliacoes: [],
+					$usuario_endereco: 1,
+					$carrinhos: 1,
+					$desejos: 1
+            }
+        } */
+	/* #swagger.responses[200] = {
+            description: 'Usuario cadastrado.',
+            schema: {
+                status: 200,
+                detail: 'Usuario cadastrado com sucesso',
+                severity: 'success'
+            }
+    } */
+	/* #swagger.responses[422] = {
+            description: 'Erro interno',
+            schema: {
+                status: 422,
+                detail: 'mensagem do sistema',
+                severity: 'danger'
+            }
+    } */
     res.send(await cadastrarUsuario(req.body))
 })
 
 router.put('/', verificarToken, async (req,res)=>{
+	// #swagger.tags = ['Usuarios']
+	// #swagger.description = 'Edita um Usuario'
+	/* #swagger.parameters['obj'] = {
+                in: 'body',
+                schema: {
+                	$usuario_id: 1,
+                    $usuario_email: "email@email.com",
+					$usuario_senha: "senha-usuario",
+					$usuario_nome: "Nome do Usuario",
+					$usuario_cpf: "123.123.123-12",
+					$usuario_celular: "8599999-9999",
+					$usuario_newsletter: 1,
+					$usuario_avaliacoes: [],
+					$usuario_endereco: 1,
+					$carrinhos: 1,
+					$desejos: 1
+                }
+        } */
+	/* #swagger.responses[200] = {
+            description: 'Usuario atualizada',
+            schema: {
+                status: 200,
+                detail: 'Usuario atualizado com sucesso.',
+                severity: 'success'
+            }
+    } */
+	/* #swagger.responses[422] = {
+            description: 'Erro interno',
+            schema: {
+                status: 422,
+                detail: 'mensagem do sistema',
+                severity: 'danger'
+            }
+    } */
     res.send(await editarUsuario(req.body))
 })
 
 router.delete('/:id', verificarToken, async (req,res)=>{
+	// #swagger.tags = ['Usuarios']
+	// #swagger.description = 'Deleta um usuario'
+	/* #swagger.responses[200] = {
+            description: 'Usuario deletado',
+            schema: {
+                status: 200,
+                detail: 'Usuario deletado com sucesso.',
+                severity: 'success'
+            }
+    } */
+	/* #swagger.responses[422] = {
+            description: 'Erro interno',
+            schema: {
+                status: 422,
+                detail: 'mensagem do sistema',
+                severity: 'danger'
+            }
+    } */
     res.send(await apagarUsuario(req.params.id))
 })
 
