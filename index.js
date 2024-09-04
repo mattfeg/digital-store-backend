@@ -83,7 +83,17 @@ app.use('/produtos',
 	verificarToken,
 	produtosRoutes);
 
-app.use('/pedidos', verificarToken, pedidosRoutes)
+app.use('/pedidos',
+	/* #swagger.responses[401] = {
+            description: 'Não autorizado',
+            schema: {
+                status: 401,
+                detail: 'Usuário não encontrado.',
+                severity: 'warm'
+            }
+    } */
+	verificarToken,
+	pedidosRoutes)
 
 app.use('/categorias',
 	/* #swagger.responses[401] = {
