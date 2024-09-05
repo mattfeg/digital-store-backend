@@ -1,11 +1,7 @@
-const { logar } = require('./src/controllers/usuariosController');
 const { verificarToken } = require('./src/utils');
-const { prisma } = require('./src/database/index');
-const { jwt } = require('jsonwebtoken');
 const express = require('express');
 const cors = require('cors');
 const nodemailer = require('nodemailer');
-const bcrypt = require('bcrypt');
 const swaggerUI = require('swagger-ui-express');
 require('dotenv').config();
 
@@ -28,7 +24,13 @@ const transporter = nodemailer.createTransport({
 	},
 });
 
-app.use(cors());
+const corsOptions = {
+    origin: '*', // Permite todas as origens. Você pode restringir a uma lista específica de URLs se necessário.
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    allowedHeaders: 'Content-Type, Authorization'
+  };
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerFile));
 
