@@ -8,8 +8,8 @@ router.get('/', async (req,res)=>{
     /* #swagger.responses[200] = {
             description: 'Retorna lista de marcas',
             schema: [{
-                marca_id: 1,
-                marca_nome: 'Vestuario',
+                categoria_id: 1,
+                categoria_nome: 'Vestuario',
                 criado_em: '2024-08-26 23:31:00',
                 atualizado_em: '2024-08-26 23:31:00'
             }]
@@ -31,8 +31,8 @@ router.get('/:id', async (req,res)=>{
     /* #swagger.responses[200] = {
             description: 'Retorna uma marca',
             schema: [{
-                marca_id: 1,
-                marca_nome: 'Vestuario',
+                categoria_id: 1,
+                categoria_nome: 'Vestuario',
                 criado_em: '2024-08-26 23:31:00',
                 atualizado_em: '2024-08-26 23:31:00'
             }]

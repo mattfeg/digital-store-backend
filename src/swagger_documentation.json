@@ -5,7 +5,7 @@
     "title": "DigitalStore API",
     "description": "Documentação da API da digital store"
   },
-  "host": "localhost:8000",
+  "host": "https://digital-store-backend-c4an.onrender.com",
   "basePath": "/",
   "schemes": [
     "http",
@@ -2890,7 +2890,12 @@
                   "type": "string",
                   "example": "imagem-blusa"
                 }
-              }
+              },
+              "required": [
+                "pedido_descricao",
+                "pedido_status",
+                "pedido_imagem"
+              ]
             }
           }
         ],
@@ -3215,6 +3220,515 @@
                 "detail": {
                   "type": "string",
                   "example": "Pedido deletado."
+                },
+                "severity": {
+                  "type": "string",
+                  "example": "success"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "401": {
+            "description": "Não autorizado",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 401
+                },
+                "detail": {
+                  "type": "string",
+                  "example": "Usuário não encontrado."
+                },
+                "severity": {
+                  "type": "string",
+                  "example": "warm"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "422": {
+            "description": "Erro interno",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 422
+                },
+                "detail": {
+                  "type": "string",
+                  "example": "mensagem do sistema"
+                },
+                "severity": {
+                  "type": "string",
+                  "example": "danger"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/categorias/": {
+      "get": {
+        "tags": [
+          "Categorias"
+        ],
+        "description": "Retorna lista de categorias",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retorna lista de marcas",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "categoria_id": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "categoria_nome": {
+                    "type": "string",
+                    "example": "Vestuario"
+                  },
+                  "criado_em": {
+                    "type": "string",
+                    "example": "2024-08-26 23:31:00"
+                  },
+                  "atualizado_em": {
+                    "type": "string",
+                    "example": "2024-08-26 23:31:00"
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "401": {
+            "description": "Não autorizado",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 401
+                },
+                "detail": {
+                  "type": "string",
+                  "example": "Usuário não encontrado."
+                },
+                "severity": {
+                  "type": "string",
+                  "example": "warm"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "422": {
+            "description": "Erro interno",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 422
+                },
+                "detail": {
+                  "type": "string",
+                  "example": "mensagem do sistema"
+                },
+                "severity": {
+                  "type": "string",
+                  "example": "danger"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Categorias"
+        ],
+        "description": "Cria uma categoria",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "categoria_nome": {
+                  "type": "string",
+                  "example": "Puma"
+                },
+                "categoria_descricao": {
+                  "type": "string",
+                  "example": "Linha de Produtos Puma"
+                },
+                "produtos": {
+                  "type": "array",
+                  "example": [],
+                  "items": {}
+                }
+              },
+              "required": [
+                "categoria_nome",
+                "categoria_descricao",
+                "produtos"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Categoria criada",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 200
+                },
+                "detail": {
+                  "type": "string",
+                  "example": "Categoria criada com sucesso."
+                },
+                "severity": {
+                  "type": "string",
+                  "example": "success"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "401": {
+            "description": "Não autorizado",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 401
+                },
+                "detail": {
+                  "type": "string",
+                  "example": "Usuário não encontrado."
+                },
+                "severity": {
+                  "type": "string",
+                  "example": "warm"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "422": {
+            "description": "Erro interno",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 422
+                },
+                "detail": {
+                  "type": "string",
+                  "example": "mensagem do sistema"
+                },
+                "severity": {
+                  "type": "string",
+                  "example": "danger"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Categorias"
+        ],
+        "description": "Editar uma categoria",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "categoria_id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "categoria_nome": {
+                  "type": "string",
+                  "example": "Puma"
+                },
+                "categoria_descricao": {
+                  "type": "string",
+                  "example": "Linha de Produtos Puma"
+                },
+                "produtos": {
+                  "type": "array",
+                  "example": [],
+                  "items": {}
+                }
+              },
+              "required": [
+                "categoria_id",
+                "categoria_nome",
+                "categoria_descricao",
+                "produtos"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Categoria editada",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 200
+                },
+                "detail": {
+                  "type": "string",
+                  "example": "Categoria editada com sucesso."
+                },
+                "severity": {
+                  "type": "string",
+                  "example": "success"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "401": {
+            "description": "Não autorizado",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 401
+                },
+                "detail": {
+                  "type": "string",
+                  "example": "Usuário não encontrado."
+                },
+                "severity": {
+                  "type": "string",
+                  "example": "warm"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "422": {
+            "description": "Erro interno",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 422
+                },
+                "detail": {
+                  "type": "string",
+                  "example": "mensagem do sistema"
+                },
+                "severity": {
+                  "type": "string",
+                  "example": "danger"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/categorias/{id}": {
+      "get": {
+        "tags": [
+          "Categorias"
+        ],
+        "description": "Retorna uma categoria",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retorna uma marca",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "categoria_id": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "categoria_nome": {
+                    "type": "string",
+                    "example": "Vestuario"
+                  },
+                  "criado_em": {
+                    "type": "string",
+                    "example": "2024-08-26 23:31:00"
+                  },
+                  "atualizado_em": {
+                    "type": "string",
+                    "example": "2024-08-26 23:31:00"
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "401": {
+            "description": "Não autorizado",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 401
+                },
+                "detail": {
+                  "type": "string",
+                  "example": "Usuário não encontrado."
+                },
+                "severity": {
+                  "type": "string",
+                  "example": "warm"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "422": {
+            "description": "Erro interno",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 422
+                },
+                "detail": {
+                  "type": "string",
+                  "example": "mensagem do sistema"
+                },
+                "severity": {
+                  "type": "string",
+                  "example": "danger"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Categorias"
+        ],
+        "description": "Apaga uma marca",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Categoria apagada",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 200
+                },
+                "detail": {
+                  "type": "string",
+                  "example": "Categoria apagada"
                 },
                 "severity": {
                   "type": "string",

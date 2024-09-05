@@ -7,7 +7,7 @@ module.exports = {
 		title: 'DigitalStore API',
 		description: 'Documentação da API da digital store',
 	},
-	host: `localhost:${port}`,
+	host: `https://digital-store-backend-c4an.onrender.com`,
 	schemes: ['http', 'https'],
 	consumes: ['application/json'],
 	produces: ['application/json'],

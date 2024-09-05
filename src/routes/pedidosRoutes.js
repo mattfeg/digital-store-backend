@@ -56,9 +56,9 @@ router.post('/', async (req,res)=>{
     /* #swagger.parameters['obj'] = {
                 in: 'body',
                 schema: {
-                    pedido_descricao: 'Blusa Puma',
-                    pedido_status: 1,
-                    pedido_imagem: 'imagem-blusa'
+                    $pedido_descricao: 'Blusa Puma',
+                    $pedido_status: 1,
+                    $pedido_imagem: 'imagem-blusa'
                 }
         } */
     /* #swagger.responses[200] = {
