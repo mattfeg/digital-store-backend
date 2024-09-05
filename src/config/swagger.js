@@ -1,5 +1,5 @@
 const { port } = require('../..');
-const { Marca } = require('../documentation/index');
+const { Marcas, Avaliacoes, Categorias, Enderecos, Imagens, Pedidos, Produtos, Usuarios } = require('../documentation/index');
 
 module.exports = {
 	info: {
@@ -25,6 +25,13 @@ module.exports = {
 		// },
 	},
 	definitions: {
-		Marca,
+		Marcas,
+		Avaliacoes,
+		Categorias,
+		Enderecos,
+		Imagens,
+		Pedidos,
+		Produtos,
+		Usuarios
 	},
 };

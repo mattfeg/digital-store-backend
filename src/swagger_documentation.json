@@ -5,7 +5,7 @@
     "title": "DigitalStore API",
     "description": "Documentação da API da digital store"
   },
-  "host": "https://digital-store-backend-c4an.onrender.com/",
+  "host": "https://digital-store-backend-c4an.onrender.com",
   "basePath": "/",
   "schemes": [
     "http",
@@ -2890,7 +2890,12 @@
                   "type": "string",
                   "example": "imagem-blusa"
                 }
-              }
+              },
+              "required": [
+                "pedido_descricao",
+                "pedido_status",
+                "pedido_imagem"
+              ]
             }
           }
         ],
@@ -3784,212 +3789,6 @@
         }
       }
     },
-    "/pedidos/": {
-      "get": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Não autorizado",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "type": "number",
-                  "example": 401
-                },
-                "detail": {
-                  "type": "string",
-                  "example": "Usuário não encontrado."
-                },
-                "severity": {
-                  "type": "string",
-                  "example": "warm"
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Não autorizado",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "type": "number",
-                  "example": 401
-                },
-                "detail": {
-                  "type": "string",
-                  "example": "Usuário não encontrado."
-                },
-                "severity": {
-                  "type": "string",
-                  "example": "warm"
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Não autorizado",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "type": "number",
-                  "example": 401
-                },
-                "detail": {
-                  "type": "string",
-                  "example": "Usuário não encontrado."
-                },
-                "severity": {
-                  "type": "string",
-                  "example": "warm"
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/pedidos/{id}": {
-      "get": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Não autorizado",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "type": "number",
-                  "example": 401
-                },
-                "detail": {
-                  "type": "string",
-                  "example": "Usuário não encontrado."
-                },
-                "severity": {
-                  "type": "string",
-                  "example": "warm"
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Não autorizado",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "type": "number",
-                  "example": 401
-                },
-                "detail": {
-                  "type": "string",
-                  "example": "Usuário não encontrado."
-                },
-                "severity": {
-                  "type": "string",
-                  "example": "warm"
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            }
-          }
-        }
-      }
-    },
     "/marcas/": {
       "get": {
         "tags": [
@@ -4473,10 +4272,612 @@
           }
         }
       }
+    },
+    "/enderecos/": {
+      "get": {
+        "tags": [
+          "Endereços"
+        ],
+        "description": "Retorna lista de endereços",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retorna lista de endereços",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "endereco_id": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "endereco_estado": {
+                    "type": "string",
+                    "example": "Ceará"
+                  },
+                  "endereco_cidade": {
+                    "type": "string",
+                    "example": "Fortaleza"
+                  },
+                  "endereco_bairro": {
+                    "type": "string",
+                    "example": "Aldeota"
+                  },
+                  "endereco_rua": {
+                    "type": "string",
+                    "example": "Rua 1"
+                  },
+                  "endereco_numero": {
+                    "type": "string",
+                    "example": "12"
+                  },
+                  "endereco_complemento": {},
+                  "endereco_referencia": {},
+                  "endereco_cep": {
+                    "type": "number",
+                    "example": 12278
+                  },
+                  "usuario_id": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "criado_em": {
+                    "type": "string",
+                    "example": "2024-08-26 23:31:00"
+                  },
+                  "atualizado_em": {
+                    "type": "string",
+                    "example": "2024-08-26 23:31:00"
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "401": {
+            "description": "Não autorizado",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 401
+                },
+                "detail": {
+                  "type": "string",
+                  "example": "Usuário não encontrado."
+                },
+                "severity": {
+                  "type": "string",
+                  "example": "warm"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "422": {
+            "description": "Erro interno",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 422
+                },
+                "detail": {
+                  "type": "string",
+                  "example": "mensagem do sistema"
+                },
+                "severity": {
+                  "type": "string",
+                  "example": "danger"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Endereços"
+        ],
+        "description": "Cria uma categoria",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "endereco_estado": {
+                  "type": "string",
+                  "example": "Ceará"
+                },
+                "endereco_cidade": {
+                  "type": "string",
+                  "example": "Fortaleza"
+                },
+                "endereco_bairro": {
+                  "type": "string",
+                  "example": "Aldeota"
+                },
+                "endereco_rua": {
+                  "type": "string",
+                  "example": "Rua 1"
+                },
+                "endereco_numero": {
+                  "type": "string",
+                  "example": "12"
+                },
+                "endereco_complemento": {},
+                "endereco_referencia": {},
+                "endereco_cep": {
+                  "type": "number",
+                  "example": 12278
+                },
+                "usuario_id": {
+                  "type": "number",
+                  "example": 1
+                }
+              },
+              "required": [
+                "endereco_estado",
+                "endereco_cidade",
+                "endereco_bairro",
+                "endereco_rua",
+                "endereco_numero",
+                "endereco_complemento",
+                "endereco_referencia",
+                "endereco_cep",
+                "usuario_id"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Categoria criada",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 200
+                },
+                "detail": {
+                  "type": "string",
+                  "example": "Endereço criado com sucesso."
+                },
+                "severity": {
+                  "type": "string",
+                  "example": "success"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "401": {
+            "description": "Não autorizado",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 401
+                },
+                "detail": {
+                  "type": "string",
+                  "example": "Usuário não encontrado."
+                },
+                "severity": {
+                  "type": "string",
+                  "example": "warm"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "422": {
+            "description": "Erro interno",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 422
+                },
+                "detail": {
+                  "type": "string",
+                  "example": "mensagem do sistema"
+                },
+                "severity": {
+                  "type": "string",
+                  "example": "danger"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Endereços"
+        ],
+        "description": "Editar um endereço",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "endereco_estado": {
+                  "type": "string",
+                  "example": "Ceará"
+                },
+                "endereco_cidade": {
+                  "type": "string",
+                  "example": "Fortaleza"
+                },
+                "endereco_bairro": {
+                  "type": "string",
+                  "example": "Aldeota"
+                },
+                "endereco_rua": {
+                  "type": "string",
+                  "example": "Rua 1"
+                },
+                "endereco_numero": {
+                  "type": "string",
+                  "example": "12"
+                },
+                "endereco_complemento": {},
+                "endereco_referencia": {},
+                "endereco_cep": {
+                  "type": "number",
+                  "example": 12278
+                },
+                "usuario_id": {
+                  "type": "number",
+                  "example": 1
+                }
+              },
+              "required": [
+                "endereco_estado",
+                "endereco_cidade",
+                "endereco_bairro",
+                "endereco_rua",
+                "endereco_numero",
+                "endereco_complemento",
+                "endereco_referencia",
+                "endereco_cep",
+                "usuario_id"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Endereço editado",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 200
+                },
+                "detail": {
+                  "type": "string",
+                  "example": "Endereço editado com sucesso."
+                },
+                "severity": {
+                  "type": "string",
+                  "example": "success"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "401": {
+            "description": "Não autorizado",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 401
+                },
+                "detail": {
+                  "type": "string",
+                  "example": "Usuário não encontrado."
+                },
+                "severity": {
+                  "type": "string",
+                  "example": "warm"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "422": {
+            "description": "Erro interno",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 422
+                },
+                "detail": {
+                  "type": "string",
+                  "example": "mensagem do sistema"
+                },
+                "severity": {
+                  "type": "string",
+                  "example": "danger"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/enderecos/{id}": {
+      "get": {
+        "tags": [
+          "Endereços"
+        ],
+        "description": "Retorna um endereço",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retorna um endereço",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "endereco_id": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "endereco_estado": {
+                    "type": "string",
+                    "example": "Ceará"
+                  },
+                  "endereco_cidade": {
+                    "type": "string",
+                    "example": "Fortaleza"
+                  },
+                  "endereco_bairro": {
+                    "type": "string",
+                    "example": "Aldeota"
+                  },
+                  "endereco_rua": {
+                    "type": "string",
+                    "example": "Rua 1"
+                  },
+                  "endereco_numero": {
+                    "type": "string",
+                    "example": "12"
+                  },
+                  "endereco_complemento": {},
+                  "endereco_referencia": {},
+                  "endereco_cep": {
+                    "type": "number",
+                    "example": 12278
+                  },
+                  "usuario_id": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "criado_em": {
+                    "type": "string",
+                    "example": "2024-08-26 23:31:00"
+                  },
+                  "atualizado_em": {
+                    "type": "string",
+                    "example": "2024-08-26 23:31:00"
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "401": {
+            "description": "Não autorizado",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 401
+                },
+                "detail": {
+                  "type": "string",
+                  "example": "Usuário não encontrado."
+                },
+                "severity": {
+                  "type": "string",
+                  "example": "warm"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "422": {
+            "description": "Erro interno",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 422
+                },
+                "detail": {
+                  "type": "string",
+                  "example": "mensagem do sistema"
+                },
+                "severity": {
+                  "type": "string",
+                  "example": "danger"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Endereços"
+        ],
+        "description": "Apaga um endereço.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Endereço apagado.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 200
+                },
+                "detail": {
+                  "type": "string",
+                  "example": "Endereço apagado com sucesso."
+                },
+                "severity": {
+                  "type": "string",
+                  "example": "success"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "401": {
+            "description": "Não autorizado",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 401
+                },
+                "detail": {
+                  "type": "string",
+                  "example": "Usuário não encontrado."
+                },
+                "severity": {
+                  "type": "string",
+                  "example": "warm"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "422": {
+            "description": "Erro interno",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 422
+                },
+                "detail": {
+                  "type": "string",
+                  "example": "mensagem do sistema"
+                },
+                "severity": {
+                  "type": "string",
+                  "example": "danger"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
-    "Marca": {
+    "Marcas": {
       "type": "object",
       "properties": {
         "marca_id": {
@@ -4486,6 +4887,322 @@
         "marca_nome": {
           "type": "string",
           "example": "Nike"
+        },
+        "criado_em": {
+          "type": "string",
+          "example": "2024-08-27 00:59:36"
+        },
+        "atualizado_em": {
+          "type": "string",
+          "example": "2024-08-27 00:59:36"
+        }
+      }
+    },
+    "Avaliacoes": {
+      "type": "object",
+      "properties": {
+        "avaliacao_id": {
+          "type": "number",
+          "example": 1
+        },
+        "avaliacao_opiniao": {
+          "type": "string",
+          "example": "String"
+        },
+        "avaliacao_nota": {
+          "type": "number",
+          "example": 1
+        },
+        "usuario_id": {
+          "type": "number",
+          "example": 1
+        },
+        "criado_em": {
+          "type": "string",
+          "example": "2024-08-27 00:59:36"
+        },
+        "atualizado_em": {
+          "type": "string",
+          "example": "2024-08-27 00:59:36"
+        }
+      }
+    },
+    "Categorias": {
+      "type": "object",
+      "properties": {
+        "categoria_id": {
+          "type": "number",
+          "example": 1
+        },
+        "categoria_nome": {
+          "type": "string",
+          "example": "String"
+        },
+        "categoria_descricao": {
+          "type": "string",
+          "example": "String"
+        },
+        "produtos": {
+          "type": "array",
+          "example": [],
+          "items": {}
+        },
+        "criado_em": {
+          "type": "string",
+          "example": "2024-08-27 00:59:36"
+        },
+        "atualizado_em": {
+          "type": "string",
+          "example": "2024-08-27 00:59:36"
+        }
+      }
+    },
+    "Enderecos": {
+      "type": "object",
+      "properties": {
+        "endereco_id": {
+          "type": "number",
+          "example": 1212
+        },
+        "endereco_estado": {
+          "type": "string",
+          "example": "String"
+        },
+        "endereco_cidade": {
+          "type": "string",
+          "example": "String"
+        },
+        "endereco_bairro": {
+          "type": "string",
+          "example": "String"
+        },
+        "endereco_rua": {
+          "type": "string",
+          "example": "String"
+        },
+        "endereco_numero": {
+          "type": "string",
+          "example": "String"
+        },
+        "endereco_complemento": {
+          "type": "string",
+          "example": "String"
+        },
+        "endereco_referencia": {
+          "type": "string",
+          "example": "String"
+        },
+        "endereco_cep": {
+          "type": "string",
+          "example": "12345-67"
+        },
+        "usuario_id": {
+          "type": "number",
+          "example": 1
+        },
+        "criado_em": {
+          "type": "string",
+          "example": "2024-08-27 00:59:36"
+        },
+        "atualizado_em": {
+          "type": "string",
+          "example": "2024-08-27 00:59:36"
+        }
+      }
+    },
+    "Imagens": {
+      "type": "object",
+      "properties": {
+        "pedido_id": {
+          "type": "number",
+          "example": 1
+        },
+        "pedido_status": {
+          "type": "boolean",
+          "example": true
+        },
+        "pedido_descricao": {
+          "type": "string",
+          "example": "String"
+        },
+        "pedido_imagem": {
+          "type": "number",
+          "example": 1
+        },
+        "itens": {
+          "type": "array",
+          "example": [],
+          "items": {}
+        },
+        "criado_em": {
+          "type": "string",
+          "example": "2024-08-27 00:59:36"
+        },
+        "atualizado_em": {
+          "type": "string",
+          "example": "2024-08-27 00:59:36"
+        }
+      }
+    },
+    "Pedidos": {
+      "type": "object",
+      "properties": {
+        "pedido_id": {
+          "type": "number",
+          "example": 1
+        },
+        "pedido_status": {
+          "type": "string",
+          "example": "Em andamento"
+        },
+        "pedido_descricao": {
+          "type": "string",
+          "example": "String"
+        },
+        "pedido_imagem": {
+          "type": "number",
+          "example": 1
+        },
+        "criado_em": {
+          "type": "string",
+          "example": "2024-08-27 00:59:36"
+        },
+        "atualizado_em": {
+          "type": "string",
+          "example": "2024-08-27 00:59:36"
+        }
+      }
+    },
+    "Produtos": {
+      "type": "object",
+      "properties": {
+        "produto_id": {
+          "type": "number",
+          "example": 1
+        },
+        "produto_nome": {
+          "type": "string",
+          "example": "String"
+        },
+        "produto_descricao": {
+          "type": "string",
+          "example": "String"
+        },
+        "produto_preco": {
+          "type": "number",
+          "example": 100
+        },
+        "produto_status": {
+          "type": "boolean",
+          "example": true
+        },
+        "produto_estoque": {
+          "type": "number",
+          "example": 50
+        },
+        "produto_peso": {
+          "type": "number",
+          "example": 150
+        },
+        "produto_em_promocao": {
+          "type": "boolean",
+          "example": false
+        },
+        "produto_destaque": {
+          "type": "boolean",
+          "example": false
+        },
+        "produto_tags": {
+          "type": "string",
+          "example": "String"
+        },
+        "marca_id": {
+          "type": "number",
+          "example": 1
+        },
+        "categoria_id": {
+          "type": "number",
+          "example": 1
+        },
+        "produto_imagems": {
+          "type": "array",
+          "example": [],
+          "items": {}
+        },
+        "produto_tamanho": {
+          "type": "number",
+          "example": 1
+        },
+        "genero_id": {
+          "type": "number",
+          "example": 1
+        },
+        "colecao_id": {
+          "type": "number",
+          "example": 1
+        },
+        "pedidoItens": {
+          "type": "array",
+          "example": [],
+          "items": {}
+        },
+        "criado_em": {
+          "type": "string",
+          "example": "2024-08-27 00:59:36"
+        },
+        "atualizado_em": {
+          "type": "string",
+          "example": "2024-08-27 00:59:36"
+        }
+      }
+    },
+    "Usuarios": {
+      "type": "object",
+      "properties": {
+        "usuario_id": {
+          "type": "number",
+          "example": 1
+        },
+        "usuario_email": {
+          "type": "string",
+          "example": "email@email.com"
+        },
+        "usuario_senha": {
+          "type": "string",
+          "example": "String"
+        },
+        "usuario_nome": {
+          "type": "string",
+          "example": "String"
+        },
+        "usuario_cpf": {
+          "type": "string",
+          "example": "123.123.123-12"
+        },
+        "usuario_celular": {
+          "type": "string",
+          "example": "8591234-5678"
+        },
+        "usuario_newsletter": {
+          "type": "boolean",
+          "example": false
+        },
+        "usuario_avaliacoes": {
+          "type": "array",
+          "example": [],
+          "items": {}
+        },
+        "usuario_endereco": {
+          "type": "number",
+          "example": 1
+        },
+        "carrinhos": {
+          "type": "number",
+          "example": 1
+        },
+        "desejos": {
+          "type": "number",
+          "example": 1
         },
         "criado_em": {
           "type": "string",

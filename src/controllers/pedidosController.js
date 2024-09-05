@@ -10,7 +10,24 @@ async function listarUmPedido(id){
             pedido_id: parseInt(id)
         },
         include: {
-            itens: true
+            itens: {
+                select: {
+                    pedido_id: true,
+                    produto_id: true,
+                    quantidade: true,
+                    preco_unitario: true,
+                    criado_em: true,
+                    produto: {
+                        select: {
+                            produto_nome: true,
+                            produto_descricao: true,
+                            produto_preco: true,
+                            produto_peso: true
+                        }
+                    }
+
+                }
+            }
         }
     })
     if(pedido){

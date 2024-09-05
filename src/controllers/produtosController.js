@@ -17,7 +17,7 @@ async function listarUmProduto(id){
     try{
         return prisma.produtos.findFirst({
             where: {
-                produto_id: id
+                produto_id: parseInt(id)
             }
         })
     } catch (error) {

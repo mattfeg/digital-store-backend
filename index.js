@@ -13,6 +13,7 @@ const produtosRoutes = require('./src/routes/produtosRoutes');
 const marcasRoutes = require('./src/routes/marcasRoutes');
 const pedidosRoutes = require('./src/routes/pedidosRoutes')
 const categoriasRoutes = require('./src/routes/categoriasRoutes')
+const enderecosRoutes = require('./src/routes/enderecosRoutes')
 
 const port = 8000;
 const app = express();
@@ -85,7 +86,17 @@ app.use('/produtos',
     verificarToken,
     produtosRoutes);
 
-app.use('/pedidos', verificarToken, pedidosRoutes)
+app.use('/pedidos',
+	/* #swagger.responses[401] = {
+            description: 'Não autorizado',
+            schema: {
+                status: 401,
+                detail: 'Usuário não encontrado.',
+                severity: 'warm'
+            }
+    } */
+	verificarToken,
+	pedidosRoutes)
 
 app.use('/categorias',
     /* #swagger.responses[401] = {
@@ -112,6 +123,18 @@ app.use(
     verificarToken,
     marcasRoutes
 );
+
+app.use('/enderecos',
+	/* #swagger.responses[401] = {
+            description: 'Não autorizado',
+            schema: {
+                status: 401,
+                detail: 'Usuário não encontrado.',
+                severity: 'warm'
+            }
+    } */
+	verificarToken,
+	enderecosRoutes)
 
 app.listen(port, () => {
     console.log(`http://localhost:${port}`);
