@@ -8,7 +8,6 @@ datasource db {
   shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
-// TODO: Criar relação entre avaliacoes e produtos
 model avaliacoes {
   avaliacao_id      Int       @id @default(autoincrement())
   avaliacao_opiniao String    @db.VarChar(255)
@@ -18,6 +17,8 @@ model avaliacoes {
   usuarios          usuarios  @relation(fields: [usuario_id], references: [usuario_id], onDelete: Cascade)
   criado_em         DateTime  @default(now()) @db.DateTime(0)
   atualizado_em     DateTime? @default(now()) @db.DateTime(0)
+  produto_id        Int
+  produto           produtos  @relation(fields: [produto_id], references: [produto_id])
 }
 
 model enderecos {
@@ -54,6 +55,7 @@ model produtos {
   genero_id           Int?
   colecao_id          Int?
   pedidoItens         pedidoItens[]
+  avaliacoes          avaliacoes[]
 
   marca     marcas?     @relation(fields: [marca_id], references: [marca_id])
   categoria categorias? @relation(fields: [categoria_id], references: [categoria_id])
@@ -119,6 +121,7 @@ model pedidos {
   pedido_descricao String?
   pedido_imagem    String?
 
+  cupom cupons[]      @relation("cuponsPedido")
   itens pedidoItens[]
 
   criado_em     DateTime  @default(now()) @db.DateTime(0)
@@ -164,7 +167,7 @@ model generos {
 model categorias {
   categoria_id        Int        @id @default(autoincrement())
   categoria_nome      String     @db.VarChar(30)
-  categoria_descricao String?     @db.VarChar(255)
+  categoria_descricao String?    @db.VarChar(255)
   produtos            produtos[]
 
   criado_em     DateTime  @default(now()) @db.DateTime(0)
@@ -217,6 +220,17 @@ model usuarios {
   usuario_endereco   enderecos?
   carrinhos          carrinhos?
   desejos            desejos?
+
+  criado_em     DateTime  @default(now()) @db.DateTime(0)
+  atualizado_em DateTime? @default(now()) @db.DateTime(0)
+}
+
+model cupons {
+  cupom_id       Int    @id @default(autoincrement())
+  cupom_nome     String @db.VarChar(255)
+  cupom_desconto Float  @db.Float()
+
+  cupom_pedidos pedidos[] @relation("cuponsPedido")
 
   criado_em     DateTime  @default(now()) @db.DateTime(0)
   atualizado_em DateTime? @default(now()) @db.DateTime(0)
