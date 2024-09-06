@@ -205,7 +205,6 @@ model imagens {
   atualizado_em DateTime? @default(now()) @db.DateTime(0)
 }
 
-// TODO: Deixar CPF Unico para cada usuário
 model usuarios {
   usuario_id         Int          @id @default(autoincrement())
   usuario_email      String       @unique(map: "usuario_email") @db.VarChar(200)
