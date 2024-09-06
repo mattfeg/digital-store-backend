@@ -37,15 +37,15 @@ model enderecos {
 }
 
 model produtos {
-  produto_id          Int           @id @default(autoincrement())
-  produto_nome        String        @db.VarChar(255)
-  produto_descricao   String        @db.Text
+  produto_id          Int             @id @default(autoincrement())
+  produto_nome        String          @db.VarChar(255)
+  produto_descricao   String          @db.Text
   produto_preco       Int
-  produto_status      Boolean       @default(true)
+  produto_status      Boolean         @default(true)
   produto_estoque     Int
   produto_peso        Int?
-  produto_em_promocao Boolean       @default(false)
-  produto_destaque    Boolean       @default(false)
+  produto_em_promocao Boolean         @default(false)
+  produto_destaque    Boolean         @default(false)
   produto_tags        Int?
   marca_id            Int?
   categoria_id        Int?
@@ -54,25 +54,27 @@ model produtos {
   genero_id           Int?
   colecao_id          Int?
   pedidoItens         pedidoItens[]
+  carrinhoItens       carrinhoItens[]
+  desejoItens         desejoItens[]
 
   marca     marcas?     @relation(fields: [marca_id], references: [marca_id])
   categoria categorias? @relation(fields: [categoria_id], references: [categoria_id])
   genero    generos?    @relation(fields: [genero_id], references: [genero_id])
   colecao   colecoes?   @relation(fields: [colecao_id], references: [colecao_id])
 
-  criado_em     DateTime        @default(now()) @db.DateTime(0)
-  atualizado_em DateTime?       @default(now()) @db.DateTime(0)
-  carrinhoItens carrinhoItens[]
-  desejoItens   desejoItens[]
+  criado_em     DateTime  @default(now()) @db.DateTime(0)
+  atualizado_em DateTime? @default(now()) @db.DateTime(0)
 }
 
 model desejos {
-  desejo_id     Int           @id @default(autoincrement())
-  usuario_id    Int           @unique
-  usuario       usuarios      @relation(fields: [usuario_id], references: [usuario_id])
-  itens         desejoItens[]
-  criado_em     DateTime      @default(now()) @db.DateTime(0)
-  atualizado_em DateTime?     @default(now()) @db.DateTime(0)
+  desejo_id  Int           @id @default(autoincrement())
+  usuario_id Int           @unique
+  itens      desejoItens[]
+
+  usuario usuarios @relation(fields: [usuario_id], references: [usuario_id])
+
+  criado_em     DateTime  @default(now()) @db.DateTime(0)
+  atualizado_em DateTime? @default(now()) @db.DateTime(0)
 }
 
 model desejoItens {
@@ -144,7 +146,7 @@ model pedidoItens {
 model colecoes {
   colecao_id        Int        @id @default(autoincrement())
   colecao_nome      String     @db.VarChar(30)
-  colecao_descricao String     @db.VarChar(255)
+  colecao_descricao String?    @db.VarChar(255)
   produtos          produtos[]
 
   criado_em     DateTime  @default(now()) @db.DateTime(0)
@@ -154,7 +156,7 @@ model colecoes {
 model generos {
   genero_id        Int        @id @default(autoincrement())
   genero_nome      String     @db.VarChar(30)
-  genero_descricao String     @db.VarChar(255)
+  genero_descricao String?    @db.VarChar(255)
   produtos         produtos[]
 
   criado_em     DateTime  @default(now()) @db.DateTime(0)
@@ -164,7 +166,7 @@ model generos {
 model categorias {
   categoria_id        Int        @id @default(autoincrement())
   categoria_nome      String     @db.VarChar(30)
-  categoria_descricao String?     @db.VarChar(255)
+  categoria_descricao String?    @db.VarChar(255)
   produtos            produtos[]
 
   criado_em     DateTime  @default(now()) @db.DateTime(0)
@@ -172,9 +174,10 @@ model categorias {
 }
 
 model marcas {
-  marca_id   Int        @id @default(autoincrement())
-  marca_nome String     @db.VarChar(50)
-  produtos   produtos[]
+  marca_id        Int        @id @default(autoincrement())
+  marca_nome      String     @db.VarChar(50)
+  marca_descricao String?    @db.VarChar(50)
+  produtos        produtos[]
 
   criado_em     DateTime  @default(now()) @db.DateTime(0)
   atualizado_em DateTime? @default(now()) @db.DateTime(0)
@@ -210,7 +213,7 @@ model usuarios {
   usuario_email      String       @unique(map: "usuario_email") @db.VarChar(200)
   usuario_senha      String?      @db.VarChar(255)
   usuario_nome       String       @db.VarChar(100)
-  usuario_cpf        String       @db.VarChar(20)
+  usuario_cpf        String       @unique @db.VarChar(20)
   usuario_celular    String?      @db.VarChar(20)
   usuario_newsletter Boolean?     @default(false)
   usuario_avaliacoes avaliacoes[]
