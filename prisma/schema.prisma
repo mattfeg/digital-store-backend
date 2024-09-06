@@ -113,13 +113,11 @@ model carrinhoItens {
   @@unique([carrinho_id, produto_id])
 }
 
-// TODO: Relacionar o campo de pedido_imagem com a model imagens
 model pedidos {
   pedido_id        Int      @id @default(autoincrement())
   pedido_data      DateTime @default(now()) @db.DateTime(0)
   pedido_status    String   @default("Em Andamento")
   pedido_descricao String?
-  pedido_imagem    String?
 
   cupom cupons[]      @relation("cuponsPedido")
   itens pedidoItens[]
