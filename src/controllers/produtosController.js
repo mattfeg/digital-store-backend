@@ -18,6 +18,12 @@ async function listarUmProduto(id){
         return prisma.produtos.findFirst({
             where: {
                 produto_id: parseInt(id)
+            }, include: {
+                marca: true,
+                categoria: true,
+                genero: true,
+                colecao: true,
+                _count: true
             }
         })
     } catch (error) {
