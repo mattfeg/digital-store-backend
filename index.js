@@ -1,11 +1,7 @@
-const { logar } = require('./src/controllers/usuariosController');
 const { verificarToken } = require('./src/utils');
-const { prisma } = require('./src/database/index');
-const { jwt } = require('jsonwebtoken');
 const express = require('express');
 const cors = require('cors');
 const nodemailer = require('nodemailer');
-const bcrypt = require('bcrypt');
 const swaggerUI = require('swagger-ui-express');
 require('dotenv').config();
 
@@ -22,23 +18,29 @@ const enderecosRoutes = require('./src/routes/enderecosRoutes')
 const port = 8000;
 const app = express();
 const transporter = nodemailer.createTransport({
-	service: 'gmail',
-	auth: {
-		user: process.env.EMAIL_USER,
-		pass: process.env.EMAIL_PASS,
-	},
+    service: 'gmail',
+    auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+    },
 });
 
-app.use(cors());
+const corsOptions = {
+    origin: '*',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    allowedHeaders: 'Content-Type, Authorization'
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerFile));
 
 app.get('/', (req, res) => {
-	res.redirect('/docs');
+    res.redirect('/docs');
 });
 
 app.use('/usuarios',
-	/* #swagger.responses[401] = {
+    /* #swagger.responses[401] = {
             description: 'Não autorizado',
             schema: {
                 status: 401,
@@ -46,10 +48,10 @@ app.use('/usuarios',
                 severity: 'warm'
             }
     } */
-	usuarioRoutes);
+    usuarioRoutes);
 
 app.use('/avaliacoes',
-	/* #swagger.responses[401] = {
+    /* #swagger.responses[401] = {
             description: 'Não autorizado',
             schema: {
                 status: 401,
@@ -57,11 +59,11 @@ app.use('/avaliacoes',
                 severity: 'warm'
             }
     } */
-	verificarToken,
-	avaliacoesRoutes);
+    verificarToken,
+    avaliacoesRoutes);
 
 app.use('/imagens',
-	/* #swagger.responses[401] = {
+    /* #swagger.responses[401] = {
             description: 'Não autorizado',
             schema: {
                 status: 401,
@@ -69,11 +71,11 @@ app.use('/imagens',
                 severity: 'warm'
             }
     } */
-	verificarToken,
-	imagensRoutes);
+    verificarToken,
+    imagensRoutes);
 
 app.use('/produtos',
-	/* #swagger.responses[401] = {
+    /* #swagger.responses[401] = {
             description: 'Não autorizado',
             schema: {
                 status: 401,
@@ -81,8 +83,8 @@ app.use('/produtos',
                 severity: 'warm'
             }
     } */
-	verificarToken,
-	produtosRoutes);
+    verificarToken,
+    produtosRoutes);
 
 app.use('/pedidos',
 	/* #swagger.responses[401] = {
@@ -97,7 +99,7 @@ app.use('/pedidos',
 	pedidosRoutes)
 
 app.use('/categorias',
-	/* #swagger.responses[401] = {
+    /* #swagger.responses[401] = {
             description: 'Não autorizado',
             schema: {
                 status: 401,
@@ -105,12 +107,12 @@ app.use('/categorias',
                 severity: 'warm'
             }
     } */
-	verificarToken,
-	categoriasRoutes)
+    verificarToken,
+    categoriasRoutes)
 
 app.use(
-	'/marcas',
-	/* #swagger.responses[401] = {
+    '/marcas',
+    /* #swagger.responses[401] = {
             description: 'Não autorizado',
             schema: {
                 status: 401,
@@ -118,8 +120,8 @@ app.use(
                 severity: 'warm'
             }
     } */
-	verificarToken,
-	marcasRoutes
+    verificarToken,
+    marcasRoutes
 );
 
 app.use('/enderecos',
@@ -135,9 +137,9 @@ app.use('/enderecos',
 	enderecosRoutes)
 
 app.listen(port, () => {
-	console.log(`http://localhost:${port}`);
+    console.log(`http://localhost:${port}`);
 });
 
 module.exports = {
-	port,
+    port,
 };
