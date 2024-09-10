@@ -8,6 +8,18 @@ datasource db {
   shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
+model banners {
+  banner_id        Int       @id @default(autoincrement())
+  banner_nome      String    @db.VarChar(255)
+  banner_subtitulo String
+  banner_titulo    String
+  banner_descricao String?
+  banner_link      String?
+  banner_imagem    String
+  criado_em        DateTime  @default(now()) @db.DateTime(0)
+  atualizado_em    DateTime? @default(now()) @db.DateTime(0)
+}
+
 model avaliacoes {
   avaliacao_id      Int       @id @default(autoincrement())
   avaliacao_opiniao String    @db.VarChar(255)
@@ -124,7 +136,6 @@ model pedidos {
   pedido_descricao String?
   itens            pedidoItens[]
   cupons           cupons[]      @relation("cuponsPedido")
-
 }
 
 model pedidoItens {

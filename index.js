@@ -8,6 +8,7 @@ require('dotenv').config();
 const swaggerFile = require('./src/swagger_documentation.json');
 const usuarioRoutes = require('./src/routes/usuariosRoutes');
 const avaliacoesRoutes = require('./src/routes/avaliacoesRoutes');
+const bannersRoutes = require('./src/routes/bannersRoutes');
 const imagensRoutes = require('./src/routes/imagensRoutes');
 const produtosRoutes = require('./src/routes/produtosRoutes');
 const marcasRoutes = require('./src/routes/marcasRoutes');
@@ -49,6 +50,18 @@ app.use('/usuarios',
             }
     } */
     usuarioRoutes);
+
+app.use('/banners',
+    /* #swagger.responses[401] = {
+            description: 'Não autorizado',
+            schema: {
+                status: 401,
+                detail: 'Usuário não encontrado.',
+                severity: 'warm'
+            }
+    } */
+    verificarToken,
+    bannersRoutes);
 
 app.use('/avaliacoes',
     /* #swagger.responses[401] = {
