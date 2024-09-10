@@ -124,6 +124,7 @@ model pedidos {
   pedido_descricao String?
   itens            pedidoItens[]
   cupons           cupons[]      @relation("cuponsPedido")
+
 }
 
 model pedidoItens {
@@ -222,3 +223,14 @@ model cupons {
   atualizado_em  DateTime? @default(now()) @db.DateTime(0)
   pedidos        pedidos[] @relation("cuponsPedido")
 }
+
+// model cupons {
+//   cupom_id       Int    @id @default(autoincrement())
+//   cupom_nome     String @db.VarChar(255)
+//   cupom_desconto Float  @db.Float()
+
+//   cupom_pedidos pedidos[] @relation("cuponsPedido")
+
+//   criado_em     DateTime  @default(now()) @db.DateTime(0)
+//   atualizado_em DateTime? @default(now()) @db.DateTime(0)
+// }
