@@ -2,7 +2,15 @@ const { prisma } = require('../database/index')
 
 async function listarProdutos(){
     try{
-        return prisma.produtos.findMany()
+        return prisma.produtos.findMany({
+            include: {
+                marca: true,
+                categoria: true,
+                genero: true,
+                colecao: true,
+                _count: true
+            }
+        })
 
     } catch (error) {
         return {
