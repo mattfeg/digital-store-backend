@@ -1,6 +1,7 @@
 const { prisma } = require('../database/index')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
+const {parse} = require("dotenv");
 require('dotenv').config()
 
 async function listarUsuarios(req,res){
@@ -10,7 +11,7 @@ async function listarUsuarios(req,res){
 async function listarUmUsuario(id){
     return prisma.usuarios.findFirst({
         where: {
-            usuario_id: id
+            usuario_id: parseInt(id)
         }
     })
 }
@@ -76,9 +77,6 @@ async function apagarUsuario(id){
 }
 
 async function editarUsuario(data){
-
-    const saltRounds = 10;
-    const senhaEncriptada = await bcrypt.hash(data.usuario_senha, saltRounds)
 
     try {
         const usuarioAtualizado = await prisma.usuarios.update({
